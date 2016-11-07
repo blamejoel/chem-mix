@@ -1,0 +1,52 @@
+html, body {
+    font-family: sans-serif;
+    font-size: 12px;
+    color: rgba(0,0,0,0.6);
+    padding: 0 0;
+}
+
+#mixing-board {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-style: dashed;
+    border-width: 5px;
+    border-color: rgba(0,0,0,0.2);
+    width: 600px;
+    height: 300px;
+}
+
+#mixing-board-greeting {
+    position:relative;
+    font-size: 2em;
+    font-weight: bold;
+    color: rgba(0,0,0,0.2);
+    top:50%;
+    transform: translateY(-50%);
+    text-align:center;
+}
+
+#mixing-board-greeting::before {
+    font-size: 1.5em;
+    content: "[";
+}
+
+#mixing-board-greeting::after {
+    font-size: 1.5em;
+    content: "]";
+}
+
+#mixing-board-content {
+    position:absolute;
+    bottom: 0;
+    padding: 20px;
+    font-size: 1.5em;
+}
+
+.chem {
+    display:inline;
+}
+.chem:not(:first-child):before {
+    content: "+ ";
+}
