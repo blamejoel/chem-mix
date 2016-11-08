@@ -1,11 +1,17 @@
 $(function () {
-  var chemShapeSize = 54;
+  /* TODO: fix location of chemicals that get dragged out */
+  var chemShapeSize = 60;
+  var fullSizeShape = 210;
   var workspace = document.getElementById('workspace');
   var mixBoard= document.getElementById('mixing-board');
   var mixGreet = document.getElementById('mixing-board-greeting');
-  var mixBoardPos = mixBoard.getBoundingClientRect().left - 40;
-  var chemPadding = mixBoardPos;
   var mixedChems = [];
+  var availChems = [];
+  
+  var fe = newChemical('Fe');
+  moveElement(fe, fullSizeShape*(availChems.length-1)+10,0);
+  var cl = newChemical('Cl');
+  moveElement(cl, fullSizeShape*(availChems.length-1)+10,0);
 
   // convert rgb to hex (Eric Petrucelli)
   // http://stackoverflow.com/questions/1740700/
@@ -23,10 +29,11 @@ $(function () {
   function updateChemPadding() {
     var chemColors = []
     var mixingBoard = mixBoard.getBoundingClientRect();
+    var mixBoardPos = mixBoard.getBoundingClientRect().left - 50;
     var i;
     for (i = 0; i < mixedChems.length; i++) {
       var x = mixBoardPos + chemShapeSize*(i + 1);
-      var y = mixingBoard.bottom - (chemShapeSize + 10);
+      var y = mixingBoard.bottom - (chemShapeSize + 5);
       moveElement(mixedChems[i], x, y);
       chemColors.push(rgb2hex(mixedChems[i].style.backgroundColor));
     }
@@ -37,13 +44,15 @@ $(function () {
     }
   }
 
+  window.onresize = updateChemPadding;
+
   // add chemical to mixed chem array
   function addChem(target) {
     if (!mixedChems.length) {
       mixBoard.classList.add('compound');
       mixGreet.setAttribute('hidden', true);
     }
-    if (!containsChem(target)) {
+    if (!containsChem(target, mixedChems)) {
       mixedChems.push(target);
     }
   }
@@ -63,14 +72,26 @@ $(function () {
   }
 
   // searches for a chemical in the mixed chem array
-  function containsChem(target) {
+  function containsChem(target, arr) {
     var i;
-    for (i = 0; i < mixedChems.length; i++) {
-      if (mixedChems[i] == target) {
-        return true;
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i] == target) {
+        return i;
       }
     }
     return false;
+  }
+
+  // create new chemical
+  function newChemical(chem) {
+    var chemShape = document.createElement('div');
+    var randomColor = '#'+(Math.random()*0xffffff<<0).toString(16);
+    chemShape.classList.add('chem-shape');
+    chemShape.textContent = chem;
+    chemShape.style.backgroundColor = randomColor;
+    document.getElementById('workspace').appendChild(chemShape);
+    availChems.push(chemShape);
+    return chemShape;
   }
 
   // move a draggable element
@@ -86,7 +107,7 @@ $(function () {
   }
 
   // initialize draggable class
-  interact('.draggable')
+  interact('.chem-shape')
     .draggable({
       // enable initial throwing
       inertia: true,
@@ -119,15 +140,6 @@ $(function () {
           target.classList.remove('chem-shape-small');
           target.removeAttribute('data-mixed');
         }
-        // snap shrunken shape to bottom of mixing area if inside
-        else if (target.getAttribute('data-mixed')) {
-          var target = event.target;
-          var x = target.getAttribute('data-x');
-          var y = target.getAttribute('data-y');
-          x = chemPadding;
-          y = mixingBoard.bottom - (chemShapeSize + 10);
-          moveElement(target, x, y);
-        }
         updateChemPadding();
       }
     });
@@ -135,7 +147,7 @@ $(function () {
   // initialize dropzone class
   interact('#mixing-board').dropzone({
     // only accept elements matching this CSS selector
-    accept: '.draggable',
+    accept: '.chem-shape',
     // Require a 25% element overlap for a drop to be possible
     overlap: 0.25,
 
