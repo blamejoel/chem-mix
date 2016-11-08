@@ -1,6 +1,45 @@
 $(function () {
-  /* TODO: need better way to snap chemicals relative to canvas */
-  var chemPadding = 80;
+  /* TODO: when chemical is removed from left, right chemicals should shift */
+  var chemShapeSize = 54;
+  var mixboardElem = document.getElementById('mixing-board');
+  var mixboardPos = mixboardElem.getBoundingClientRect().left - 40;
+  var chemPadding = mixboardPos;
+
+  function updateChemPadding() {
+    var mixedChems = document.getElementsByClassName('chem-shape-small');
+    chemPadding = mixboardPos + (chemShapeSize*mixedChems.length);
+    if (mixedChems.length < 1) {
+      $('#mixing-board').removeClass('drop-target');
+      $('#mixing-board-greeting').show();
+    }
+  }
+
+  $('.chem-shape').mousedown(function() {
+    var currShape = this.getBoundingClientRect();
+    var mixingBoard = mixboardElem.getBoundingClientRect();
+    if (this.getAttribute('data-snap')) {
+      if (currShape.left > mixingBoard.left && currShape.right < mixingBoard.right) {
+        if (currShape.top > mixingBoard.top && currShape.bottom < mixingBoard.bottom) {
+          console.log('clicked in the box!');
+          this.classList.remove('chem-shape-small');
+          var x = 20;
+          var y = 20;
+          this.style.webkitTransform = 
+            this.style.transform = 
+            'translate(' + x + 'px, ' + y + 'px)';
+
+          // update the position attributes
+          this.setAttribute('data-x', x);
+          this.setAttribute('data-y', y);
+          this.removeAttribute('data-snap');
+
+          updateChemPadding();
+        }
+      }
+
+    }
+  });
+
   interact('.chem-shape')
     .draggable({
       // enable initial throwing
@@ -68,9 +107,7 @@ $(function () {
       // feedback the possibility of a drop
       dropzoneElement.classList.add('drop-target');
       draggableElement.classList.add('can-drop');
-      /* draggableElement.textContent = 'Dragged in'; */
       $('#mixing-board-greeting').hide();
-      chemPadding += 60;
     },
     ondragleave: function (event) {
       // remove the drop feedback style
@@ -79,11 +116,11 @@ $(function () {
       $('#mixing-board-greeting').show();
       event.relatedTarget.classList.remove('chem-shape-small');
       event.relatedTarget.removeAttribute('data-snap');
-      chemPadding -= 60;
     },
     ondrop: function (event) {
       event.relatedTarget.classList.add('chem-shape-small');
       event.relatedTarget.setAttribute('data-snap', true);
+      updateChemPadding();
     },
     ondropdeactivate: function (event) {
       // remove active dropzone feedback
