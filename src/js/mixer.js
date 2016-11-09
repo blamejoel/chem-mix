@@ -48,6 +48,7 @@ $(function () {
 
   // add chemical to mixed chem array
   function addChem(target) {
+    console.log('chemical added, ' + mixedChems.length + ' in queue.');
     if (!mixedChems.length) {
       mixBoard.classList.add('compound');
       mixGreet.setAttribute('hidden', true);
@@ -59,6 +60,7 @@ $(function () {
 
   // remove chemical from mixed chem array
   function removeChem(target) {
+    console.log('chemical removed, ' + mixedChems.length + ' left.');
     var index = mixedChems.indexOf(target);
     if (index > -1) {
       mixedChems.splice(index,1);
@@ -76,7 +78,7 @@ $(function () {
     var i;
     for (i = 0; i < arr.length; i++) {
       if (arr[i] == target) {
-        return i;
+        return true;
       }
     }
     return false;
