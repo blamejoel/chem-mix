@@ -20,7 +20,7 @@ PASSWORD = config['db']['PASSWORD']
 # create our little application :)
 app = Flask(__name__)
 app.config.from_object(__name__)
-socketio = SocketIO(app)
+# socketio = SocketIO(app)
 
 # function to establish a database connection
 # set values from database configuration, above
@@ -52,4 +52,5 @@ def list_entries():
     # return render_template('list.html', entries=entries)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    # socketio.run(app)
+    app.run()
