@@ -36,9 +36,10 @@ $(function(){
       lookup: searchData.arr,
       onSelect: function(suggestion) {
         // some function here
-        console.log(suggestion.name);
+        /* console.log(suggestion.name); */
         var chem = newChemical(suggestion.name);
         moveElement(chem, fullSizeShape*(availChems.length-1)+10,0);
+        $('#autocomplete').val('');
       },
       formatResult: function(suggestion, currentValue) {
         return suggestion.name + ' ' + suggestion.value;

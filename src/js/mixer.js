@@ -1,64 +1,17 @@
+var workspace;
+var mixBoard;
+var mixGreet;
 $(function () {
-  var workspace = document.getElementById('workspace');
-  var mixBoard= document.getElementById('mixing-board');
-  var mixGreet = document.getElementById('mixing-board-greeting');
-
-  var fe = newChemical('Fe');
-  moveElement(fe, fullSizeShape*(availChems.length-1)+10,0);
-  var cl = newChemical('Cl');
-  moveElement(cl, fullSizeShape*(availChems.length-1)+10,0);
-
-  // convert rgb to hex (Eric Petrucelli)
-  // http://stackoverflow.com/questions/1740700/
-  // how-to-get-hex-color-value-rather-than-rgb-value
-  function rgb2hex(rgb) {
-    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-    function hex(x) {
-      return ("0" + parseInt(x).toString(16)).slice(-2);
-
-    }
-    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-  }
+  workspace = document.getElementById('workspace');
+  mixBoard= document.getElementById('mixing-board');
+  mixGreet = document.getElementById('mixing-board-greeting');
 
   window.onresize = updateChemPadding;
 
-  // add chemical to mixed chem array
-  function addChem(target) {
-    console.log('chemical added, ' + mixedChems.length + ' in queue.');
-    if (!mixedChems.length) {
-      mixBoard.classList.add('compound');
-      mixGreet.setAttribute('hidden', true);
-    }
-    if (!containsChem(target, mixedChems)) {
-      mixedChems.push(target);
-    }
-  }
-
-  // remove chemical from mixed chem array
-  function removeChem(target) {
-    console.log('chemical removed, ' + mixedChems.length + ' left.');
-    var index = mixedChems.indexOf(target);
-    if (index > -1) {
-      mixedChems.splice(index,1);
-    }
-    // clear mixboard background if empty
-    if (mixedChems.length < 1) {
-      mixBoard.style.backgroundColor = 'transparent';
-      mixBoard.classList.remove('compound');
-      mixGreet.removeAttribute('hidden');
-    }
-  }
-
-  // searches for a chemical in the mixed chem array
-  function containsChem(target, arr) {
-    var i;
-    for (i = 0; i < arr.length; i++) {
-      if (arr[i] == target) {
-        return true;
-      }
-    }
-    return false;
-  }
+  /* var fe = newChemical('Fe'); */
+  /* moveElement(fe, fullSizeShape*(availChems.length-1)+10,0); */
+  /* var cl = newChemical('Cl'); */
+  /* moveElement(cl, fullSizeShape*(availChems.length-1)+10,0); */
 
   // initialize draggable class
   interact('.chem-shape')
@@ -95,6 +48,7 @@ $(function () {
           target.removeAttribute('data-mixed');
         }
         updateChemPadding();
+        $('.chem-shape').textfill();
       }
     });
 
@@ -137,6 +91,56 @@ var chemShapeSize = 60;
 var fullSizeShape = 210;
 var mixedChems = [];
 var availChems = [];
+
+// convert rgb to hex (Eric Petrucelli)
+// http://stackoverflow.com/questions/1740700/
+// how-to-get-hex-color-value-rather-than-rgb-value
+function rgb2hex(rgb) {
+  rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  function hex(x) {
+    return ("0" + parseInt(x).toString(16)).slice(-2);
+
+  }
+  return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+// add chemical to mixed chem array
+function addChem(target) {
+  /* console.log('chemical added, ' + mixedChems.length + ' in queue.'); */
+  if (!mixedChems.length) {
+    mixBoard.classList.add('compound');
+    mixGreet.setAttribute('hidden', true);
+  }
+  if (!containsChem(target, mixedChems)) {
+    mixedChems.push(target);
+  }
+}
+
+// remove chemical from mixed chem array
+function removeChem(target) {
+  /* console.log('chemical removed, ' + mixedChems.length + ' left.'); */
+  var index = mixedChems.indexOf(target);
+  if (index > -1) {
+    mixedChems.splice(index,1);
+  }
+  // clear mixboard background if empty
+  if (mixedChems.length < 1) {
+    mixBoard.style.backgroundColor = 'transparent';
+    mixBoard.classList.remove('compound');
+    mixGreet.removeAttribute('hidden');
+  }
+}
+
+// searches for a chemical in the mixed chem array
+function containsChem(target, arr) {
+  var i;
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] == target) {
+      return true;
+    }
+  }
+  return false;
+}
 
 // updates mixed chemicals positions when chemicals are added/removed
 function updateChemPadding() {

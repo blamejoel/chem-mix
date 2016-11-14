@@ -123,6 +123,7 @@ label {
     font-size: 4em;
     text-align:center;
     line-height: 200px;
+    color: rgba(255,255,255,0.8);
 }
 
 .chem-shape:hover,chem-shape:active {
@@ -130,6 +131,7 @@ label {
 }
 
 .chem-shape-small {
+    color: transparent;
     width: 50px;
     height: 50px;
     line-height: 50px;
