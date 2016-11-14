@@ -5,6 +5,8 @@ $(function(){
     { name: 'Raphisiderite', canonicalsmiles: '[O-2].[O-2].[O-2].[Fe+3].[Fe+3]', value: '14833' },
     { name: 'sodium chloride', canonicalsmiles: '[Na+].[Cl-]', value: '5234' },
     { name: 'ARGON', canonicalsmiles: '[Ar]', value: '23968' },
+    { name: 'Potassium biflouride', canonicalsmiles: '[F.[F-].[K+]]', value='11829350' },
+    { name:'hexachlorophene', canonicalsmiles: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', value='3598' },
   ];
 
   var searchSmiles = [
@@ -13,6 +15,8 @@ $(function(){
     { name: 'Raphisiderite', value: '[O-2].[O-2].[O-2].[Fe+3].[Fe+3]', pubchemid: '14833' },
     { name: 'sodium chloride', value: '[Na+].[Cl-]', pubchemid: '5234' },
     { name: 'ARGON', value: '[Ar]', pubchemid: '23968' },
+    { name: 'Potassium biflouride', value: '[F.[F-].[K+]]', pubchemid='11829350' },
+    { name:'hexachlorophene', value: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', pubchemid='3598' },
   ];
 
 
