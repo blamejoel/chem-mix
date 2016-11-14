@@ -38,3 +38,6 @@ jspm_packages
 
 # vim swap files
 *.swp
+
+#misc config files
+*config.json
