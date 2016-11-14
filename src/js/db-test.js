@@ -6,7 +6,9 @@ $(function(){
     { name: 'sodium chloride', canonicalsmiles: '[Na+].[Cl-]', value: '5234' },
     { name: 'ARGON', canonicalsmiles: '[Ar]', value: '23968' },
     { name: 'Potassium biflouride', canonicalsmiles: '[F.[F-].[K+]]', value:'11829350' },
-    { name:'hexachlorophene', canonicalsmiles: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', value:'3598' },
+    { name: 'hexachlorophene', canonicalsmiles: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', value:'3598' },
+    { name: 'Disulfur dichloride', canonicalsmiles: 'S(SCl)Cl', value: '24807'},
+    { name: 'Bisphenol A', canonicalsmiles:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', value: '6623' },
   ];
 
   var searchSmiles = [
@@ -16,7 +18,9 @@ $(function(){
     { name: 'sodium chloride', value: '[Na+].[Cl-]', pubchemid: '5234' },
     { name: 'ARGON', value: '[Ar]', pubchemid: '23968' },
     { name: 'Potassium biflouride', value: '[F.[F-].[K+]]', pubchemid:'11829350' },
-    { name:'hexachlorophene', value: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', pubchemid:'3598' },
+    { name: 'hexachlorophene', value: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', pubchemid: '3598' },
+    { name: 'Disulfur dichloride', value: 'S(SCl)Cl', pubchemid: '24807' },
+    { name: 'Bisphenol A', value:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', pubchemid: '6623' },
   ];
 
 
