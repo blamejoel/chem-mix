@@ -1,13 +1,8 @@
 $(function () {
-  /* TODO: fix location of chemicals that get dragged out */
-  var chemShapeSize = 60;
-  var fullSizeShape = 210;
   var workspace = document.getElementById('workspace');
   var mixBoard= document.getElementById('mixing-board');
   var mixGreet = document.getElementById('mixing-board-greeting');
-  var mixedChems = [];
-  var availChems = [];
-  
+
   var fe = newChemical('Fe');
   moveElement(fe, fullSizeShape*(availChems.length-1)+10,0);
   var cl = newChemical('Cl');
@@ -23,25 +18,6 @@ $(function () {
 
     }
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-  }
-
-  // updates mixed chemicals positions when chemicals are added/removed
-  function updateChemPadding() {
-    var chemColors = []
-    var mixingBoard = mixBoard.getBoundingClientRect();
-    var mixBoardPos = mixBoard.getBoundingClientRect().left - 50;
-    var i;
-    for (i = 0; i < mixedChems.length; i++) {
-      var x = mixBoardPos + chemShapeSize*(i + 1);
-      var y = mixingBoard.bottom - (chemShapeSize + 5);
-      moveElement(mixedChems[i], x, y);
-      chemColors.push(rgb2hex(mixedChems[i].style.backgroundColor));
-    }
-    if (mixedChems.length) {
-      // update mixboard background color
-      var last = mixedChems.length - 1;
-      mixBoard.style.backgroundColor = '#' + rybColorMixer.mix(chemColors);
-    }
   }
 
   window.onresize = updateChemPadding;
@@ -82,30 +58,6 @@ $(function () {
       }
     }
     return false;
-  }
-
-  // create new chemical
-  function newChemical(chem) {
-    var chemShape = document.createElement('div');
-    var randomColor = '#'+(Math.random()*0xffffff<<0).toString(16);
-    chemShape.classList.add('chem-shape');
-    chemShape.textContent = chem;
-    chemShape.style.backgroundColor = randomColor;
-    document.getElementById('workspace').appendChild(chemShape);
-    availChems.push(chemShape);
-    return chemShape;
-  }
-
-  // move a draggable element
-  function moveElement(target, x, y) {
-    // translate the element
-    target.style.webkitTransform = 
-      target.style.transform = 
-      'translate(' + x + 'px, ' + y + 'px)';
-
-    // update the position attributes
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
   }
 
   // initialize draggable class
@@ -180,3 +132,55 @@ $(function () {
     }
   });
 });
+
+var chemShapeSize = 60;
+var fullSizeShape = 210;
+var mixedChems = [];
+var availChems = [];
+
+// updates mixed chemicals positions when chemicals are added/removed
+function updateChemPadding() {
+  var chemColors = []
+  var mixingBoard = mixBoard.getBoundingClientRect();
+  var mixBoardPos = mixBoard.getBoundingClientRect().left - 50;
+  var i;
+  for (i = 0; i < mixedChems.length; i++) {
+    var x = mixBoardPos + chemShapeSize*(i + 1);
+    var y = mixingBoard.bottom - (chemShapeSize + 5);
+    moveElement(mixedChems[i], x, y);
+    chemColors.push(rgb2hex(mixedChems[i].style.backgroundColor));
+  }
+  if (mixedChems.length) {
+    // update mixboard background color
+    var last = mixedChems.length - 1;
+    mixBoard.style.backgroundColor = '#' + rybColorMixer.mix(chemColors);
+  }
+}
+
+// move a draggable element
+function moveElement(target, x, y) {
+  // translate the element
+  target.style.webkitTransform = 
+    target.style.transform = 
+    'translate(' + x + 'px, ' + y + 'px)';
+
+  // update the position attributes
+  target.setAttribute('data-x', x);
+  target.setAttribute('data-y', y);
+}
+
+// create new chemical
+function newChemical(chem) {
+  var chemShape = document.createElement('div');
+  var chemText = document.createElement('span');
+  var randomColor = '#'+(Math.random()*0xffffff<<0).toString(16);
+  chemShape.classList.add('chem-shape');
+  chemShape.style.backgroundColor = randomColor;
+  chemText.textContent = chem;
+  chemShape.appendChild(chemText);
+  document.getElementById('workspace').appendChild(chemShape);
+  availChems.push(chemShape);
+  $('.chem-shape').textfill();
+  return chemShape;
+}
+
