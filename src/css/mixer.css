@@ -147,6 +147,7 @@ label {
     font-size: 4em;
     text-align:center;
     color: rgba(255,255,255,0.8);
+    transition: ease 0.2s;
 }
 
 .chem-shape:hover,chem-shape:active {
@@ -168,21 +169,28 @@ label {
     line-height: 50px;
     margin: 0;
     font-size: 2em;
-    transition: ease 0.2s;
 }
 
 #trash-container {
     position:absolute;
     bottom: 25px;
     left: 25px;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
     text-align: center;
 }
 
 #trash-icon {
-    /* width: 100%; */
+    position:absolute;
     opacity: 0.4;
     font-size: 7em;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: ease 0.2s;
+}
+
+.moving {
+    transition: none;
 }

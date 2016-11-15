@@ -51,9 +51,12 @@ $(function () {
             && target.getAttribute('data-mixed')) {
           target.classList.remove('chem-shape-small');
           target.removeAttribute('data-mixed');
+
+          x = (parseFloat(target.getAttribute('data-x')) || 0) - 50,
+          y = (parseFloat(target.getAttribute('data-y')) || 0) - 50;
+          moveElement(target, x, y);
         }
         updateChemPadding();
-        $('.chem-text').textfill();
       }
     });
 
@@ -88,6 +91,46 @@ $(function () {
     ondropdeactivate: function (event) {
       // remove active dropzone feedback
       event.target.classList.remove('drop-active');
+    }
+  });
+
+  // setup trashcan
+  interact('#trash-container').dropzone({
+    // only accept elements matching this CSS selector
+    accept: '.chem-shape',
+    // Require a 25% element overlap for a drop to be possible
+    overlap: 0.25,
+
+    // listen for drop-related events:
+    ondropactivate: function (event) {
+      event.target.classList.add('drop-active');
+      event.relatedTarget.classList.add('moving');
+    },
+    ondragenter: function (event) {
+      var draggableElement = event.relatedTarget,
+      dropzoneElement = event.target;
+      dropzoneElement.children[0].style.fontSize = '8em';
+      event.relatedTarget.style.opacity = 0.2;
+
+      // feedback the possibility of a drop
+    },
+    ondragleave: function (event) {
+      // remove the drop feedback style
+      var draggableElement = event.relatedTarget,
+      dropzoneElement = event.target;
+      dropzoneElement.children[0].style.fontSize = '7em';
+      event.relatedTarget.style.opacity = 1;
+    },
+    ondrop: function (event) {
+      var draggableElement = event.relatedTarget,
+      dropzoneElement = event.target;
+      removeChemFromCanvas(draggableElement);
+      dropzoneElement.children[0].style.fontSize = '7em';
+    },
+    ondropdeactivate: function (event) {
+      // remove active dropzone feedback
+      event.target.classList.remove('drop-active');
+      event.relatedTarget.classList.remove('moving');
     }
   });
 });
@@ -253,3 +296,13 @@ function updateMixedList(arr) {
     }
   }
 }
+
+// remove chemical from avail chem array
+function removeChemFromCanvas(target) {
+  var index = availChems.indexOf(target);
+  if (index > -1) {
+    availChems.splice(index,1);
+  }
+  target.remove();
+}
+
