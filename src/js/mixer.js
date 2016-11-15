@@ -53,7 +53,7 @@ $(function () {
           target.removeAttribute('data-mixed');
         }
         updateChemPadding();
-        $('.chem-shape').textfill();
+        $('.chem-text').textfill();
       }
     });
 
@@ -106,7 +106,6 @@ function rgb2hex(rgb) {
 
 // add chemical to mixed chem array
 function addChem(target) {
-  console.log(target);
   if (!mixedChems.length) {
     mixBoard.classList.add('compound');
     mixGreet.setAttribute('hidden', true);
@@ -118,7 +117,6 @@ function addChem(target) {
 
 // remove chemical from mixed chem array
 function removeChem(target) {
-  /* console.log('chemical removed, ' + mixedChems.length + ' left.'); */
   var index = mixedChems.indexOf(target);
   if (index > -1) {
     mixedChems.splice(index,1);
@@ -178,43 +176,57 @@ function moveElement(target, x, y) {
 function newChemical(chem) {
   var chemShape = document.createElement('div');
   var chemText = document.createElement('span');
+  var chemTextContainer = document.createElement('div');
   var randomColor = '#'+(Math.random()*0xffffff<<0).toString(16);
   chemShape.classList.add('chem-shape');
   chemShape.style.backgroundColor = randomColor;
   chemText.textContent = chem;
-  chemShape.appendChild(chemText);
+  chemTextContainer.appendChild(chemText);
+  chemTextContainer.classList.add('chem-text');
+  chemShape.appendChild(chemTextContainer);
   document.getElementById('workspace').appendChild(chemShape);
   availChems.push(chemShape);
-  $('.chem-shape').textfill();
+  $('.chem-text').textfill();
   return chemShape;
 }
 
 // check mixture
 function checkMixture(arr) {
+  var pass = 'check_circle';
+  var fail = 'whatshot';
+  var caution = 'warning';
   var chems = [];
-  console.log('Mixing ' + arr.length + ' chemicals...');
   var i = 0;
   for (i = 0; i < arr.length; i++) {
     chems.push(arr[i].firstChild.textContent.toLowerCase());
   }
+  var icon = document.getElementById('mixing-board-result').children[0];
   if (containsChem('water', chems)) {
     if (containsChem('cycloate', chems)) {
       // fail
       console.log('fail');
       mixBoard.style.backgroundColor = 'red';
+      icon.innerHTML = fail;
     }
     else if (containsChem('benzene', chems)) {
       // pass
       console.log('pass');
       mixBoard.style.backgroundColor = 'green';
+      icon.innerHTML = pass;
     }
     else if (containsChem('urea', chems)) {
       // caution
       console.log('caution');
       mixBoard.style.backgroundColor = 'yellow';
+      icon.innerHTML = caution;
+    }
+    else {
+      console.log('unknown result');
+      icon.innerHTML = '';
     }
   }
   else {
     console.log('unknown result');
+    icon.innerHTML = '';
   }
 }

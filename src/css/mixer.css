@@ -98,6 +98,20 @@ label {
     content: "]";
 }
 
+#mixing-board-result {
+    position:relative;
+    font-size: 5em;
+    font-weight: bold;
+    top:50%;
+    transform: translateY(-50%);
+    text-align:center;
+}
+
+#mixing-board-result > i {
+    font-size: 2em;
+    color: rgba(255,255,255,0.9);
+}
+
 #mixing-board-content {
     position:absolute;
     bottom: 0;
@@ -120,14 +134,22 @@ label {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 200px;
     height: 200px;
+    line-height: 200px;
     font-size: 4em;
     text-align:center;
-    line-height: 200px;
     color: rgba(255,255,255,0.8);
 }
 
 .chem-shape:hover,chem-shape:active {
     cursor: default;
+}
+
+.chem-text {
+    margin-left:auto;
+    margin-right:auto;
+    height:100%;
+    width: 80%;
+    text-align: center;
 }
 
 .chem-shape-small {
@@ -146,9 +168,12 @@ label {
     left: 25px;
     width: 80px;
     height: 80px;
+    line-height: 80px;
+    text-align: center;
 }
 
 #trash-icon {
-    width: 100%;
+    /* width: 100%; */
     opacity: 0.4;
+    font-size: 7em;
 }

@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title></title>
   <link rel="stylesheet" href="css/mixer.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
   <script src="js/jquery-3.1.1.slim.min.js"></script>
   <!-- http://interactjs.io/ -->
   <script src="js/interact.min.js"></script>
@@ -29,18 +31,19 @@
         value="pubchem-id" id="select-id">
         <label for="select-id">PubChem ID</label>
       </div>
-      <div id="result-list">
-      </div>
     </div>
     <div id="mixing-board">
       <div id="mixing-board-greeting">
         Drag chemicals into this canvas
       </div>
-      <div id="mixing-board-content">
+      <div id="mixing-board-result">
+        <i class="material-icons"></i>
       </div>
+      <div id="mixing-board-content"></div>
     </div>
     <div id="trash-container">
-      <img src="img/trash-icon.svg" id="trash-icon">
+      <i class="material-icons" id="trash-icon">delete_forever</i>
+      <!-- <img src="img/trash-icon.svg" id="trash-icon"> -->
     </div>
   </div>
 </body>
