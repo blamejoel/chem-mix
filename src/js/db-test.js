@@ -10,6 +10,7 @@ $(function(){
     { name: 'Disulfur dichloride', canonicalsmiles: 'S(SCl)Cl', value: '24807'},
     { name: 'Bisphenol A', canonicalsmiles:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', value: '6623' },
     { name: 'Benzene', canonicalsmiles: 'C1=CC=CC=C1', value: '241'},
+    { name: 'Urea', canonicalsmiles: 'C(=O)(N)N', value: '1176'},
   ];
 
   var searchSmiles = [
@@ -23,6 +24,7 @@ $(function(){
     { name: 'Disulfur dichloride', value: 'S(SCl)Cl', pubchemid: '24807' },
     { name: 'Bisphenol A', value:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', pubchemid: '6623' },
     { name: 'Benzene', value: 'C1=CC=CC=C1', pubchemid: '241'},
+    { name: 'Urea', value: 'C(=O)(N)N', pubchemid: '1176'},
   ];
 
 
