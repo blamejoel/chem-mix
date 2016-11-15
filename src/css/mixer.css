@@ -108,8 +108,8 @@ label {
 }
 
 #mixing-board-result > i {
-    font-size: 2em;
-    color: rgba(255,255,255,0.9);
+    font-size: 3em;
+    color: rgba(0,0,0,0.3);
 }
 
 #mixing-board-content {

@@ -192,7 +192,7 @@ function newChemical(chem) {
 
 // check mixture
 function checkMixture(arr) {
-  var pass = 'check_circle';
+  var pass = 'check';
   var fail = 'whatshot';
   var caution = 'warning';
   var chems = [];
@@ -208,17 +208,17 @@ function checkMixture(arr) {
       mixBoard.style.backgroundColor = 'red';
       icon.innerHTML = fail;
     }
-    else if (containsChem('benzene', chems)) {
-      // pass
-      console.log('pass');
-      mixBoard.style.backgroundColor = 'green';
-      icon.innerHTML = pass;
-    }
     else if (containsChem('urea', chems)) {
       // caution
       console.log('caution');
       mixBoard.style.backgroundColor = 'yellow';
       icon.innerHTML = caution;
+    }
+    else if (containsChem('benzene', chems)) {
+      // pass
+      console.log('pass');
+      mixBoard.style.backgroundColor = 'green';
+      icon.innerHTML = pass;
     }
     else {
       console.log('unknown result');
