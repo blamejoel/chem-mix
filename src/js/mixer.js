@@ -230,7 +230,7 @@ function newChemical(chem) {
   chemShape.appendChild(chemTextContainer);
   document.getElementById('workspace').appendChild(chemShape);
   availChems.push(chemShape);
-  $('.chem-text').textfill();
+  $('.chem-text').last().textfill();
   return chemShape;
 }
 
@@ -302,7 +302,7 @@ function removeChemFromCanvas(target) {
   var index = availChems.indexOf(target);
   if (index > -1) {
     availChems.splice(index,1);
+    target.remove();
   }
-  target.remove();
 }
 
