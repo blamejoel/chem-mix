@@ -204,18 +204,21 @@ function checkMixture(arr) {
   }
   updateMixedList(chems);
   var icon = document.getElementById('mixing-board-result').children[0];
+  document.getElementById('incompatible-note').setAttribute('hidden', true);
   if (containsChem('water', chems)) {
     if (containsChem('cycloate', chems)) {
       // fail
       console.log('fail');
       mixBoard.style.backgroundColor = 'red';
       icon.innerHTML = fail;
+      document.getElementById('incompatible-note').removeAttribute('hidden');
     }
     else if (containsChem('urea', chems)) {
       // caution
       console.log('caution');
       mixBoard.style.backgroundColor = 'yellow';
       icon.innerHTML = caution;
+      document.getElementById('incompatible-note').removeAttribute('hidden');
     }
     else if (containsChem('benzene', chems)) {
       // pass

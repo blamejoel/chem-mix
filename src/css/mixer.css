@@ -114,10 +114,17 @@ label {
 
 #mixing-board-content {
     position:absolute;
-    bottom: -60px;
-    padding: 20px;
+    bottom: -40px;
     font-size: 1.5em;
     font-weight: bold;
+}
+
+#incompatible-note {
+    position:absolute;
+    bottom: -70px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: red;
 }
 
 .chem {
