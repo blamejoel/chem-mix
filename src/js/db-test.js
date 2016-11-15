@@ -9,6 +9,7 @@ $(function(){
     { name: 'hexachlorophene', canonicalsmiles: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', value:'3598' },
     { name: 'Disulfur dichloride', canonicalsmiles: 'S(SCl)Cl', value: '24807'},
     { name: 'Bisphenol A', canonicalsmiles:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', value: '6623' },
+    { name: 'Benzene', canonicalsmiles: 'C1=CC=CC=C1', value: '241'},
   ];
 
   var searchSmiles = [
@@ -21,6 +22,7 @@ $(function(){
     { name: 'hexachlorophene', value: 'C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl', pubchemid: '3598' },
     { name: 'Disulfur dichloride', value: 'S(SCl)Cl', pubchemid: '24807' },
     { name: 'Bisphenol A', value:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', pubchemid: '6623' },
+    { name: 'Benzene', value: 'C1=CC=CC=C1', pubchemid: '241'},
   ];
 
 
