@@ -112,7 +112,6 @@ function addChem(target) {
   }
   if (!containsChem(target, mixedChems)) {
     mixedChems.push(target);
-    checkMixture(mixedChems);
   }
 }
 
@@ -158,6 +157,7 @@ function updateChemPadding() {
     // update mixboard background color
     var last = mixedChems.length - 1;
     mixBoard.style.backgroundColor = '#' + rybColorMixer.mix(chemColors);
+    checkMixture(mixedChems);
   }
 }
 
@@ -194,19 +194,24 @@ function checkMixture(arr) {
   console.log('Mixing ' + arr.length + ' chemicals...');
   var i = 0;
   for (i = 0; i < arr.length; i++) {
-    /* console.log(arr[i].firstChild.textContent); */
     chems.push(arr[i].firstChild.textContent.toLowerCase());
   }
   if (containsChem('water', chems) && containsChem('cycloate', chems)) {
     // fail
     console.log('fail');
+    mixBoard.style.backgroundColor = 'red';
   }
   else if (containsChem('water', chems) && containsChem('benzene')) {
     // pass
     console.log('pass');
+    mixBoard.style.backgroundColor = 'green';
   }
   else if (containsChem('water', chems) && containsChem('urea')) {
     // caution
     console.log('caution');
+    mixBoard.style.backgroundColor = 'yellow';
+  }
+  else {
+    console.log('unknown result');
   }
 }
