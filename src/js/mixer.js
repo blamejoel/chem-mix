@@ -106,6 +106,7 @@ function rgb2hex(rgb) {
 
 // add chemical to mixed chem array
 function addChem(target) {
+  console.log(target);
   if (!mixedChems.length) {
     mixBoard.classList.add('compound');
     mixGreet.setAttribute('hidden', true);
@@ -196,20 +197,22 @@ function checkMixture(arr) {
   for (i = 0; i < arr.length; i++) {
     chems.push(arr[i].firstChild.textContent.toLowerCase());
   }
-  if (containsChem('water', chems) && containsChem('cycloate', chems)) {
-    // fail
-    console.log('fail');
-    mixBoard.style.backgroundColor = 'red';
-  }
-  else if (containsChem('water', chems) && containsChem('benzene')) {
-    // pass
-    console.log('pass');
-    mixBoard.style.backgroundColor = 'green';
-  }
-  else if (containsChem('water', chems) && containsChem('urea')) {
-    // caution
-    console.log('caution');
-    mixBoard.style.backgroundColor = 'yellow';
+  if (containsChem('water', chems)) {
+    if (containsChem('cycloate', chems)) {
+      // fail
+      console.log('fail');
+      mixBoard.style.backgroundColor = 'red';
+    }
+    else if (containsChem('benzene', chems)) {
+      // pass
+      console.log('pass');
+      mixBoard.style.backgroundColor = 'green';
+    }
+    else if (containsChem('urea', chems)) {
+      // caution
+      console.log('caution');
+      mixBoard.style.backgroundColor = 'yellow';
+    }
   }
   else {
     console.log('unknown result');
