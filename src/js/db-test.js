@@ -11,6 +11,8 @@ $(function(){
     { name: 'Bisphenol A', canonicalsmiles:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', value: '6623' },
     { name: 'Benzene', canonicalsmiles: 'C1=CC=CC=C1', value: '241'},
     { name: 'Urea', canonicalsmiles: 'C(=O)(N)N', value: '1176'},
+    { name: 'water', canonicalsmiles: 'O', value: '962'},
+    { name: 'CYCLOATE', canonicalsmiles: 'CCN(C1CCCCC1)C(=O)SCC', value: '14337'},
   ];
 
   var searchSmiles = [
@@ -25,6 +27,8 @@ $(function(){
     { name: 'Bisphenol A', value:'CC(C)(C1=CC=C(C=C1)O)C2=CC=C(C=C2)O', pubchemid: '6623' },
     { name: 'Benzene', value: 'C1=CC=CC=C1', pubchemid: '241'},
     { name: 'Urea', value: 'C(=O)(N)N', pubchemid: '1176'},
+    { name: 'water', value: 'O', pubchemid: '962'},
+    { name: 'CYCLOATE', value: 'CCN(C1CCCCC1)C(=O)SCC', pubchemid: '14337'},
   ];
 
 
