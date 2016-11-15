@@ -139,3 +139,16 @@ label {
     font-size: 2em;
     transition: ease 0.2s;
 }
+
+#trash-container {
+    position:absolute;
+    bottom: 25px;
+    left: 25px;
+    width: 80px;
+    height: 80px;
+}
+
+#trash-icon {
+    width: 100%;
+    opacity: 0.4;
+}

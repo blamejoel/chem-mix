@@ -1,6 +1,11 @@
+var chemShapeSize = 60;
+var fullSizeShape = 210;
+var mixedChems = [];
+var availChems = [];
 var workspace;
 var mixBoard;
 var mixGreet;
+
 $(function () {
   workspace = document.getElementById('workspace');
   mixBoard= document.getElementById('mixing-board');
@@ -87,11 +92,6 @@ $(function () {
   });
 });
 
-var chemShapeSize = 60;
-var fullSizeShape = 210;
-var mixedChems = [];
-var availChems = [];
-
 // convert rgb to hex (Eric Petrucelli)
 // http://stackoverflow.com/questions/1740700/
 // how-to-get-hex-color-value-rather-than-rgb-value
@@ -106,13 +106,13 @@ function rgb2hex(rgb) {
 
 // add chemical to mixed chem array
 function addChem(target) {
-  /* console.log('chemical added, ' + mixedChems.length + ' in queue.'); */
   if (!mixedChems.length) {
     mixBoard.classList.add('compound');
     mixGreet.setAttribute('hidden', true);
   }
   if (!containsChem(target, mixedChems)) {
     mixedChems.push(target);
+    checkMixture(mixedChems);
   }
 }
 
@@ -188,3 +188,25 @@ function newChemical(chem) {
   return chemShape;
 }
 
+// check mixture
+function checkMixture(arr) {
+  var chems = [];
+  console.log('Mixing ' + arr.length + ' chemicals...');
+  var i = 0;
+  for (i = 0; i < arr.length; i++) {
+    /* console.log(arr[i].firstChild.textContent); */
+    chems.push(arr[i].firstChild.textContent.toLowerCase());
+  }
+  if (containsChem('water', chems) && containsChem('cycloate', chems)) {
+    // fail
+    console.log('fail');
+  }
+  else if (containsChem('water', chems) && containsChem('benzene')) {
+    // pass
+    console.log('pass');
+  }
+  else if (containsChem('water', chems) && containsChem('urea')) {
+    // caution
+    console.log('caution');
+  }
+}
