@@ -126,6 +126,7 @@ function removeChem(target) {
     mixBoard.style.backgroundColor = 'transparent';
     mixBoard.classList.remove('compound');
     mixGreet.removeAttribute('hidden');
+    updateMixedList();
   }
 }
 
@@ -198,8 +199,10 @@ function checkMixture(arr) {
   var chems = [];
   var i = 0;
   for (i = 0; i < arr.length; i++) {
-    chems.push(arr[i].firstChild.textContent.toLowerCase());
+    var chem = arr[i].firstChild.textContent.toLowerCase();
+    chems.push(chem);
   }
+  updateMixedList(chems);
   var icon = document.getElementById('mixing-board-result').children[0];
   if (containsChem('water', chems)) {
     if (containsChem('cycloate', chems)) {
@@ -228,5 +231,22 @@ function checkMixture(arr) {
   else {
     console.log('unknown result');
     icon.innerHTML = '';
+  }
+}
+
+// update mixed chemicals so far
+function updateMixedList(arr) {
+  var content = document.getElementById('mixing-board-content');
+  while (content.firstChild) {
+    content.removeChild(content.firstChild);
+  }
+  if (arr) {
+    content.textContent = 'Current mixture: ';
+    for (i = 0; i < arr.length; i++) {
+      var chemElem = document.createElement('span');
+      chemElem.classList.add('chem');
+      chemElem.textContent = arr[i];
+      content.appendChild(chemElem);
+    }
   }
 }

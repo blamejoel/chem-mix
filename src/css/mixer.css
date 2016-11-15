@@ -114,17 +114,19 @@ label {
 
 #mixing-board-content {
     position:absolute;
-    bottom: 0;
+    bottom: -60px;
     padding: 20px;
     font-size: 1.5em;
+    font-weight: bold;
 }
 
 .chem {
     display:inline;
+    font-weight: normal;
 }
 
 .chem:not(:first-child):before {
-    content: "+ ";
+    content: " + ";
 }
 
 .chem-shape {
